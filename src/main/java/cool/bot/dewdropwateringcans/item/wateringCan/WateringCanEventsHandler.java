@@ -5,6 +5,7 @@ import cool.bot.botslib.tag.DewDropBlockTags;
 import cool.bot.botslib.util.Util;
 import cool.bot.botslib.util.RNG;
 import cool.bot.dewdropwateringcans.Config;
+import cool.bot.dewdropwateringcans.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -52,8 +53,7 @@ public class WateringCanEventsHandler {
         }
 
         // Special nether interaction
-        if (level.dimension().equals(ServerLevel.NETHER) && !Config.allowNether) {
-
+        if (level.dimension().equals(ServerLevel.NETHER) && !Config.allowNether && !(Config.allowNetheriteCanAnyways && stack.is(ModItems.NETHERITE_WATERING_CAN.get()))) {
             for (int i = 0; i < 8; i++) {
                 double offsetX = 0.5;
                 double offsetY = state.getShape(level,pos).max(Direction.Axis.Y);
@@ -78,22 +78,22 @@ public class WateringCanEventsHandler {
             pos = pos.below();
             state = level.getBlockState(pos);
             Util.setMoist(level, pos);
-        // fire extinguishing mechanics
-        } else if (Config.extinguishFires) {
-            // Campfires
-            if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
-                level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
-                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
-            // Fires
-            }    else if (state.is(BlockTags.FIRE)) {
-                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-                    level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
-                    // TODO?: Sizzling particles
-            }
         // dirt to mud conversion
         } else if (Config.mudOdds > 0 && state.is(BlockTags.DIRT) && RNG.ihundo(Config.mudOdds)) {
             level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
             level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
+        // fire extinguishing mechanics (last)
+        } else if (Config.extinguishFires) {
+        // Campfires
+            if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
+                level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
+                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
+                // Fires
+            }    else if (state.is(BlockTags.FIRE)) {
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
+                // TODO?: Sizzling particles
+            }
         }
 
         // Play sound
