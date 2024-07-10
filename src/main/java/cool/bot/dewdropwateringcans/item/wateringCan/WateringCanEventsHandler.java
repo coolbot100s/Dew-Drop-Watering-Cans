@@ -70,24 +70,28 @@ public class WateringCanEventsHandler {
             state = level.getBlockState(pos);
         }
 
-        // If the block is farmland (or crops on farmland)
-        if (state.is(DewDropBlockTags.WATERABLE)) {
-            // Set moisture of farmland to 7
+        // If the block is farmland
+        if (Util.isDryWaterable(level, pos)) {
             Util.setMoist(level,pos);
-
-        } else if (state.is(BlockTags.CROPS) && level.getBlockState(pos.below()).is(DewDropBlockTags.WATERABLE)) {
+        // if the block is a crop, ontop of farmland
+        } else if (state.is(BlockTags.CROPS) && Util.isDryWaterable(level, pos.below())) {
             pos = pos.below();
             state = level.getBlockState(pos);
-            Util.setMoist(level,pos);
-
-        } else if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT) && Config.extinguishFires) {
-            level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
-            level.playSound(null,pos,SoundEvents.FIRE_EXTINGUISH,SoundSource.BLOCKS,1,1);
-        } else if (state.is(BlockTags.FIRE) && Config.extinguishFires) {
-            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
-            level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
-            // TODO?: Sizzling particles
-        } else if (state.is(BlockTags.DIRT) && Config.mudOdds > 0 && RNG.ihundo(Config.mudOdds)) {
+            Util.setMoist(level, pos);
+        // fire extinguishing mechanics
+        } else if (Config.extinguishFires) {
+            // Campfires
+            if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
+                level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
+                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
+            // Fires
+            }    else if (state.is(BlockTags.FIRE)) {
+                    level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
+                    level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
+                    // TODO?: Sizzling particles
+            }
+        // dirt to mud conversion
+        } else if (Config.mudOdds > 0 && state.is(BlockTags.DIRT) && RNG.ihundo(Config.mudOdds)) {
             level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
             level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
         }
