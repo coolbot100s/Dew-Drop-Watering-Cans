@@ -1,0 +1,6 @@
+{
+  "parent": "dew_drop_watering_cans:item/watering_can_3d",
+  "textures": {
+    "0": "dew_drop_watering_cans:item/diamond_watering_can_full"
+  }
+}

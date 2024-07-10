@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "dew_drop_watering_cans:item/gold_watering_can_3d"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "dew_drop_watering_cans:item/gold_watering_can_2d"
+    },
+    "ground": {
+      "parent": "dew_drop_watering_cans:item/gold_watering_can_2d"
+    }
+  }
+}

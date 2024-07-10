@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "dew_drop_watering_cans:item/copper_watering_can_full_2d"
+	}
+}
