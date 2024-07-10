@@ -1,11 +1,10 @@
 package cool.bot.dewdropwateringcans.item.wateringCan;
 
-import cool.bot.dewdropwateringcans.event.WateringCanFailEvent;
-import cool.bot.dewdropwateringcans.event.WateringCanFillEvent;
-import cool.bot.dewdropwateringcans.event.WateringCanPourEvent;
-import cool.bot.dewdropwateringcans.event.WateringCanSuperEvent;
-import cool.bot.dewdropwateringcans.tag.ModBlockTags;
-import cool.bot.dewdropwateringcans.util.Util;
+import cool.bot.dewdropwateringcans.event.*;
+import cool.bot.botslib.tag.DewDropBlockTags;
+import cool.bot.botslib.util.Util;
+import cool.bot.botslib.util.RNG;
+import cool.bot.dewdropwateringcans.Config;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -16,7 +15,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
@@ -37,7 +38,6 @@ public class WateringCanEventsHandler {
 
         //TODO?: Special interaction for lava
         //TODO?: Special interaction for axolotl
-        //TODO?: Special interaction when in the nether
         //TODO?: Config for each interaction type
         //TODO?: Probably raycast from the player's eyes to the target blockpos, see what it hits and make *that* the watered block if it has collision, or if it has some other special effect
         //TODO?: Datapack for a new "recipe type" for watering, with an input blockstate, and an output blockstate, the watering can is the catalyst
@@ -52,7 +52,7 @@ public class WateringCanEventsHandler {
         }
 
         // Special nether interaction
-        if (level.dimension().equals(ServerLevel.NETHER)) {
+        if (level.dimension().equals(ServerLevel.NETHER) && !Config.allowNether) {
 
             for (int i = 0; i < 8; i++) {
                 double offsetX = 0.5;
@@ -71,20 +71,25 @@ public class WateringCanEventsHandler {
         }
 
         // If the block is farmland (or crops on farmland)
-        if (state.is(ModBlockTags.WATERABLE)) {
+        if (state.is(DewDropBlockTags.WATERABLE)) {
             // Set moisture of farmland to 7
             Util.setMoist(level,pos);
-        } else if (state.is(BlockTags.CROPS) && level.getBlockState(pos.below()).is(ModBlockTags.WATERABLE)) {
+
+        } else if (state.is(BlockTags.CROPS) && level.getBlockState(pos.below()).is(DewDropBlockTags.WATERABLE)) {
             pos = pos.below();
             state = level.getBlockState(pos);
             Util.setMoist(level,pos);
-        } else if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
+
+        } else if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT) && Config.extinguishFires) {
             level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
             level.playSound(null,pos,SoundEvents.FIRE_EXTINGUISH,SoundSource.BLOCKS,1,1);
-        } else if (state.is(BlockTags.FIRE)) {
+        } else if (state.is(BlockTags.FIRE) && Config.extinguishFires) {
             level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1, 1);
             // TODO?: Sizzling particles
+        } else if (state.is(BlockTags.DIRT) && Config.mudOdds > 0 && RNG.ihundo(Config.mudOdds)) {
+            level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
+            level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
         }
 
         // Play sound
@@ -96,6 +101,17 @@ public class WateringCanEventsHandler {
             double offsetY = state.getShape(level,pos).max(Direction.Axis.Y);
             double offsetZ = RandomSource.create().nextDouble() - 0.5;
             level.sendParticles(ParticleTypes.RAIN, pos.getX() + 0.5 + offsetX, pos.getY() + offsetY, pos.getZ() + 0.5 + offsetZ,1,0,0,0,0);
+        }
+
+        // Bonemeal mechanic
+        if (Config.bonemealOdds > 0 && RNG.ihundo(Config.bonemealOdds)) {
+            pos = pos.above();
+            state = level.getBlockState(pos);
+            Block block = state.getBlock();
+            if (state.is(BlockTags.CROPS) && block instanceof CropBlock) {
+                CropBlock crop = (CropBlock) block;
+                crop.performBonemeal(level, level.getRandom(), pos, state);
+            }
         }
 
     }

@@ -69,6 +69,29 @@ public class Config
             .comment("How far right the fourth level of the watering can's super will extend")
             .defineInRange("super4.right", 2, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
+    // Bonemeal mechanic
+    private static final ForgeConfigSpec.IntValue BONEMEAL_ODDS = BUILDER
+            .comment("The chance out of 100 that bonemeal is applied to a watered crop, 0 will disable the mechanic.")
+            .defineInRange("bonemeal.odds", 0, 0, 100);
+
+    // Nether
+    private static final ForgeConfigSpec.BooleanValue ALLOW_NETHER = BUILDER
+            .comment("Allow watering cans to work in the Nether, disabled by default.")
+            .define("nether.allow", false);
+
+    // Interactions
+    private static final ForgeConfigSpec.BooleanValue EXTINGUISH_FIRES = BUILDER
+            .comment("Whether or not watering cans extinguish fires & campfires, enabled by default.")
+            .define("interactions.extinguishFires", true);
+
+    private static final ForgeConfigSpec.IntValue MUD_ODDS = BUILDER
+            .comment("The chance out of 100 that dirt is converted into mud, 0 will disable the mechanic.")
+            .defineInRange("interactions.mudOdds", 20,0,100);
+
+
+
+    // Other options
+
     static final ForgeConfigSpec SERVER_CONFIG = BUILDER.build();
 
     public static int super1forward;
@@ -87,6 +110,10 @@ public class Config
     public static int super4back;
     public static int super4left;
     public static int super4right;
+    public static int bonemealOdds;
+    public static boolean allowNether;
+    public static boolean extinguishFires;
+    public static int mudOdds;
 
 
     @SubscribeEvent
@@ -108,6 +135,10 @@ public class Config
         super4back = SUPER_4_BACK.get();
         super4left = SUPER_4_LEFT.get();
         super4right = SUPER_4_RIGHT.get();
+        bonemealOdds = BONEMEAL_ODDS.get();
+        allowNether = ALLOW_NETHER.get();
+        extinguishFires = EXTINGUISH_FIRES.get();
+        mudOdds = MUD_ODDS.get();
 
     }
 }

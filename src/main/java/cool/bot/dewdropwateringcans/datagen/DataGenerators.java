@@ -23,10 +23,5 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModRecipeProvider(output));
 
-
-        ModBlockTagProvider blockTagProvider = generator.addProvider(event.includeServer(),
-                new ModBlockTagProvider(output, lookupProvider, existingFileHelper));
-
-
     }
 }

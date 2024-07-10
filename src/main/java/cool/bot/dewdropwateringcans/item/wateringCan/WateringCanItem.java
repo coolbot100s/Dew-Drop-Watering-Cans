@@ -5,7 +5,7 @@ import cool.bot.dewdropwateringcans.event.WateringCanFailEvent;
 import cool.bot.dewdropwateringcans.event.WateringCanFillEvent;
 import cool.bot.dewdropwateringcans.event.WateringCanPourEvent;
 import cool.bot.dewdropwateringcans.event.WateringCanSuperEvent;
-import cool.bot.dewdropwateringcans.util.Util;
+import cool.bot.botslib.util.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
