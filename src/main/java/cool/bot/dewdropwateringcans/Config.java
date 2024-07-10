@@ -85,11 +85,11 @@ public class Config
 
     private static final ForgeConfigSpec.IntValue MUD_ODDS = BUILDER
             .comment("The chance out of 100 that dirt is converted into mud, 0 will disable the mechanic.")
-            .defineInRange("interactions.mudOdds", 20,0,100);
+            .defineInRange("interactions.mudOdds", 25,0,100);
 
     private static final ForgeConfigSpec.IntValue BONEMEAL_ODDS = BUILDER
             .comment("The chance out of 100 that bonemeal is applied to a watered crop, 0 will disable the mechanic.")
-            .defineInRange("interactions.bonemealOdds", 0, 0, 100);
+            .defineInRange("interactions.bonemealOdds", 25, 0, 100);
 
 
     static final ForgeConfigSpec SERVER_CONFIG = BUILDER.build();

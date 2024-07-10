@@ -18,7 +18,7 @@ public class ModItems {
             () -> new WateringCanItem(new Item.Properties().rarity(Rarity.COMMON).durability(12), 60, 18, 0));
 
     public static final RegistryObject<Item> IRON_WATERING_CAN = ITEMS.register("iron_watering_can",
-            () -> new WateringCanItem(new Item.Properties().rarity(Rarity.COMMON).durability(24), 50, 15, 1));
+            () -> new WateringCanItem(new Item.Properties().rarity(Rarity.COMMON).durability(24), 45, 15, 1));
 
     public static final RegistryObject<Item> GOLD_WATERING_CAN = ITEMS.register("gold_watering_can",
             () -> new WateringCanItem(new Item.Properties().rarity(Rarity.COMMON).durability(54), 45, 12, 2));
