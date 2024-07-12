@@ -31,10 +31,10 @@ Dew Drop's watering cans have a few special interactions with other blocks, like
 There are a few others, and we'd love to add more, so stay curious and feel free to send us your suggestions!  
 
 ## Config
-You can change the size and shape of each watering can's ability range in the.  
-You can also change the likelihood of bonemeal.
-Allow use of all or no watering cans in the nether.
-and configure other special interactions, all controlled by the server config.
+- Change the size and shape of each watering can's ability range.  
+- Change the likelihood of bonemeal, including making crops always grow when watered or disabling the mechanic entirely.  
+- Allow use of all or no watering cans in the nether.  
+- Configure other special interactions, all controlled by the server config.  
 
 ## Project Links
 
