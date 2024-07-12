@@ -79,7 +79,7 @@ public class WateringCanEventsHandler {
             state = level.getBlockState(pos);
             Util.setMoist(level, pos);
         // dirt to mud conversion
-        } else if (Config.mudOdds > 0 && state.is(BlockTags.DIRT) && RNG.ihundo(Config.mudOdds)) {
+        } else if (Config.mudOdds > 0 && (state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) && RNG.ihundo(Config.mudOdds)) {
             level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
             level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
         // fire extinguishing mechanics (last)
