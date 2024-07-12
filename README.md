@@ -22,7 +22,7 @@ If you want your watering cans to have infinite water, you can give the item the
 
 ### Speed up crop growth
 Bonemeal too expensive and tedious for you? Watering Cans that speed up crops are a staple in modded minecraft, so this feature can be found here too.
-By default there's a chance crops watered with your watering can will grow faster!  
+By default, there's a chance crops watered with your watering can will grow faster!  
 
 
 ### Water in the nether?
