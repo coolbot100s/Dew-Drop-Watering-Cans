@@ -2,9 +2,7 @@
 
 Adding Stardew Valley inspired watering cans to Minecraft.  
 This simple mod adds a standard set of watering cans that are primarily used to water crops.
-This mod was designed specifically for the [Dew Drop](https://modrinth.com/collection/1jZQOrlw) project and works great in any survival world, but we recommend pairing it with [Dew Drop: Sturdy Farmland]() and [Dew Drop: Daily Weather]() for the full experience!
-
-[Youtube Embed]()
+This mod was designed specifically for the [Dew Drop](https://modrinth.com/collection/1jZQOrlw) project and works great in any survival world, but we recommend pairing it with [Dew Drop: Sturdy Farmland](https://modrinth.com/project/sturdy-farmland) and [Dew Drop: Daily Weather](https://modrinth.com/project/daily-weather) for the full experience!
 
 
 ### Watering Cans
@@ -36,13 +34,8 @@ There are a few others, and we'd love to add more, so stay curious and feel free
 You can change the size and shape of each watering can's ability range in the.  
 You can also change the likelihood of bonemeal.
 Allow use of all or no watering cans in the nether.
-and configure other special interactions, all controlled by the [server config]().
+and configure other special interactions, all controlled by the server config.
 
 ## Project Links
 
-[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg)](https://modrinth.com/user/coolbot100s) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/curseforge_vector.svg)](https://www.curseforge.com/members/coolbot100s/projects) [![Modded Minecraft Reviews](https://raw.githubusercontent.com/intergrav/devins-badges/c7fd18efdadd1c3f12ae56b49afd834640d2d797/assets/cozy-minimal/available/mmcreviews_vector.svg)](https://mmcreviews.com/owner/coolbot100s/) [![Planet Minecraft](https://github.com/coolbot100s/Bouncy-Leaves/assets/76798835/0b2c0293-c2ab-4956-9055-70bc7d7141c5)](https://www.planetminecraft.com/collection/146032/all-garden-gals-content/) [![discord](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-singular_vector.svg)](https://discord.gg/qxRVkGDjdJ) [![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/github_vector.svg)](https://github.com/coolbot100s/Dew-Drop-Watering-Cans) [![generic-singular](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/donate/generic-singular_vector.svg)](https://github.com/sponsors/coolbot100s)  
-
-Also, check out the other mods made for [Dew Drop](https://modrinth.com/collection/1jZQOrlw)!
-
-
-
+[![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/modrinth_vector.svg)](https://modrinth.com/user/coolbot100s) [![curseforge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/curseforge_vector.svg)](https://www.curseforge.com/members/coolbot100s/projects) [![Modded Minecraft Reviews](https://raw.githubusercontent.com/intergrav/devins-badges/c7fd18efdadd1c3f12ae56b49afd834640d2d797/assets/cozy-minimal/available/mmcreviews_vector.svg)](https://mmcreviews.com/owner/coolbot100s/) [![Planet Minecraft](https://github.com/coolbot100s/Bouncy-Leaves/assets/76798835/0b2c0293-c2ab-4956-9055-70bc7d7141c5)](https://www.planetminecraft.com/collection/146032/all-garden-gals-content/) [![discord](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/social/discord-singular_vector.svg)](https://discord.gg/qxRVkGDjdJ) [![github](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/available/github_vector.svg)](https://github.com/coolbot100s/Dew-Drop-Watering-Cans) [![generic-singular](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy-minimal/donate/generic-singular_vector.svg)](https://github.com/sponsors/coolbot100s) [![Dew Drop](https://github.com/user-attachments/assets/cd9d5db2-1b8d-4550-b7b8-e1b707382126)](https://modrinth.com/collection/1jZQOrlw)
