@@ -27,6 +27,6 @@ license="${mod_license}"
 [[dependencies."${mod_id}"]]
    modId="bots_lib"
    mandatory=true
-   versionRange="3.1"
+   versionRange="4.0"
    ordering="NONE"
    side="SERVER"

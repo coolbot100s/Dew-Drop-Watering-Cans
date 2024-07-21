@@ -1,9 +1,11 @@
 package cool.bot.dewdropwateringcans.item;
 
+import cool.bot.botslib.item.DewDropCreativeTab;
 import cool.bot.dewdropwateringcans.DewDropWateringCans;
 import cool.bot.dewdropwateringcans.item.wateringCan.WateringCanItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -32,6 +34,17 @@ public class ModItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    public static void addCreative(BuildCreativeModeTabContentsEvent event)
+    {
+        if (event.getTabKey() == DewDropCreativeTab.DEWDROP_TAB.getKey()) {
+            event.accept(ModItems.COPPER_WATERING_CAN.get());
+            event.accept(ModItems.IRON_WATERING_CAN.get());
+            event.accept(ModItems.GOLD_WATERING_CAN.get());
+            event.accept(ModItems.DIAMOND_WATERING_CAN.get());
+            event.accept(ModItems.NETHERITE_WATERING_CAN.get());
+        }
     }
 
 }
