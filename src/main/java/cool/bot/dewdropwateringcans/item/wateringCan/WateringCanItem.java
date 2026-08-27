@@ -1,6 +1,7 @@
 package cool.bot.dewdropwateringcans.item.wateringCan;
 
 import cool.bot.dewdropwateringcans.Config;
+import cool.bot.dewdropwateringcans.DewDropWateringCans;
 import cool.bot.dewdropwateringcans.event.WateringCanFailEvent;
 import cool.bot.dewdropwateringcans.event.WateringCanFillEvent;
 import cool.bot.dewdropwateringcans.event.WateringCanPourEvent;
@@ -25,7 +26,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.MinecraftForge;
+import net.neoforged.neoforge.common.NeoForge;
 
 // TODO?: Maybe make this a forge fluid handler item instead of using durability as water lol
 // TODO?: Add custom sound events for sounds
@@ -104,7 +105,7 @@ public class WateringCanItem extends Item {
 
         // Fill the can if the block is water
         if (blockState.getFluidState().is(FluidTags.WATER)) {
-            MinecraftForge.EVENT_BUS.post(new WateringCanFillEvent((ServerLevel) level, (ServerPlayer) player, stack));
+            NeoForge.EVENT_BUS.post(new WateringCanFillEvent((ServerLevel) level, (ServerPlayer) player, stack));
             return InteractionResultHolder.success(stack);
         }
 
@@ -115,7 +116,7 @@ public class WateringCanItem extends Item {
 
         // If the watering can is empty, trigger a WateringCanFailEvent if the player is not creative
         if (stack.getDamageValue() >= stack.getMaxDamage() && !player.isCreative()) {
-            MinecraftForge.EVENT_BUS.post(new WateringCanFailEvent((ServerLevel) level,(ServerPlayer) player, stack));
+            NeoForge.EVENT_BUS.post(new WateringCanFailEvent((ServerLevel) level,(ServerPlayer) player, stack));
             return InteractionResultHolder.fail(stack);
         }
 
@@ -125,7 +126,7 @@ public class WateringCanItem extends Item {
         }
 
         // All checks have passed, Water that block!
-        MinecraftForge.EVENT_BUS.post(new WateringCanPourEvent((ServerLevel) level, (ServerPlayer) player, stack, pos, blockState, false));
+        NeoForge.EVENT_BUS.post(new WateringCanPourEvent((ServerLevel) level, (ServerPlayer) player, stack, pos, blockState, false));
         return InteractionResultHolder.success(player.getItemInHand(hand));
 
     }
@@ -174,7 +175,7 @@ public class WateringCanItem extends Item {
         AABB area = getAreaForSuper(superLevelToUse, player, pos);
 
         // Use Super
-        MinecraftForge.EVENT_BUS.post(new WateringCanSuperEvent((ServerLevel) level, (ServerPlayer) player, stack, area, maxSuperLevel));
+        NeoForge.EVENT_BUS.post(new WateringCanSuperEvent((ServerLevel) level, (ServerPlayer) player, stack, area, maxSuperLevel));
 
     }
 
@@ -242,28 +243,28 @@ public class WateringCanItem extends Item {
 
         switch (superLevelToUse) {
             case 1:
-                forward = Config.super1forward;
-                back = Config.super1back;
-                left = Config.super1left;
-                right = Config.super1right;
+                forward = DewDropWateringCans.CONFIG.super1forward.get();
+                back = DewDropWateringCans.CONFIG.super1back.get();
+                left = DewDropWateringCans.CONFIG.super1left.get();
+                right = DewDropWateringCans.CONFIG.super1right.get();
                 break;
             case 2:
-                forward = Config.super2forward;
-                back = Config.super2back;
-                left = Config.super2left;
-                right = Config.super2right;
+                forward = DewDropWateringCans.CONFIG.super2forward.get();
+                back = DewDropWateringCans.CONFIG.super2back.get();
+                left = DewDropWateringCans.CONFIG.super2left.get();
+                right = DewDropWateringCans.CONFIG.super2right.get();
                 break;
             case 3:
-                forward = Config.super3forward;
-                back = Config.super3back;
-                left = Config.super3left;
-                right = Config.super3right;
+                forward = DewDropWateringCans.CONFIG.super3forward.get();
+                back = DewDropWateringCans.CONFIG.super3back.get();
+                left = DewDropWateringCans.CONFIG.super3left.get();
+                right = DewDropWateringCans.CONFIG.super3right.get();
                 break;
             case 4:
-                forward = Config.super4forward;
-                back = Config.super4back;
-                left = Config.super4left;
-                right = Config.super4right;
+                forward = DewDropWateringCans.CONFIG.super4forward.get();
+                back = DewDropWateringCans.CONFIG.super4back.get();
+                left = DewDropWateringCans.CONFIG.super4left.get();
+                right = DewDropWateringCans.CONFIG.super4right.get();
                 break;
             default:
                 break;

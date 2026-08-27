@@ -5,7 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.function.Consumer;
 
@@ -16,12 +16,12 @@ public class ModRecipeProvider  extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> pWriter) {
+    protected void buildRecipes(RecipeOutput pWriter) {
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ModItems.COPPER_WATERING_CAN.get())
                 .pattern("a a")
                 .pattern("aba")
                 .pattern("aaa")
-                .define('a',Tags.Items.INGOTS_COPPER)
+                .define('a', Tags.Items.INGOTS_COPPER)
                 .define('b', Items.WATER_BUCKET)
                 .unlockedBy("has_bucket", has(Items.WATER_BUCKET))
                 .save(pWriter, "copper_watering_can");
