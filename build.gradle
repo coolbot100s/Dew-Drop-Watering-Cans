@@ -88,6 +88,9 @@ configurations {
 }
 
 dependencies {
+    // bots-lib 4.1.1-1.21.1
+    implementation "maven.modrinth:Oeb74GyG:8v4XW7mV"
+
     // Serene Seasons 10.1.0.3
     implementation "maven.modrinth:e0bNACJD:SPj5bJoM"
 

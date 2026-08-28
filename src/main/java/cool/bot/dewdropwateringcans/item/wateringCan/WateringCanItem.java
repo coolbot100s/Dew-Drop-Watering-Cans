@@ -26,6 +26,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.NeoForge;
 
 // TODO?: Maybe make this a forge fluid handler item instead of using durability as water lol
@@ -62,7 +63,7 @@ public class WateringCanItem extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(ItemStack stack, LivingEntity livingEntity) {
         return USE_DURATION;
     }
 
@@ -159,7 +160,7 @@ public class WateringCanItem extends Item {
         }
 
         // Do nothing if the item is not charged enough to use any super
-        int useDuration = this.getUseDuration(stack) - timeLeft;
+        int useDuration = this.getUseDuration(stack, entity) - timeLeft;
 
         //int chargePerLevel = requiredCharge / maxSuperLevel;
         if (useDuration < chargePerLevel) {
@@ -185,7 +186,7 @@ public class WateringCanItem extends Item {
             return;
         }
 
-        int useDuration = this.getUseDuration(stack) - timeLeft;
+        int useDuration = this.getUseDuration(stack, livingEntity) - timeLeft;
 
 
         Player player = (Player) livingEntity;
@@ -299,7 +300,7 @@ public class WateringCanItem extends Item {
                 break;
         }
 
-        return new AABB(start, end);
+        return new AABB(Vec3.atLowerCornerOf(start), Vec3.atLowerCornerOf(end));
 
     }
 

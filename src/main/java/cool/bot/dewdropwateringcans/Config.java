@@ -30,9 +30,8 @@ public class Config
     public final ModConfigSpec.IntValue mudOdds;
 
     public Config(final ModConfigSpec.Builder builder) {
-        builder.comment("");
-        builder.comment("  ~~~ [ Super Level 1 ] ~~~");
-        builder.comment("");
+
+        // Super level 1
         super1forward = builder.comment("How far forward the first level of the watering can's super will extend")
                 .defineInRange("supers.super1.forward", 2, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
@@ -45,10 +44,7 @@ public class Config
         super1right = builder.comment("How far right the first level of the watering can's super will extend")
                 .defineInRange("supers.super1.right", 0, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
-        builder.comment("");
-        builder.comment("  ~~~ [ Super Level 2 ] ~~~");
-        builder.comment("");
-
+        // Super level 2
         super2forward = builder.comment("How far forward the second level of the watering can's super will extend")
                 .defineInRange("supers.super2.forward", 2, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
@@ -61,10 +57,7 @@ public class Config
         super2right = builder.comment("How far right the second level of the watering can's super will extend")
                 .defineInRange("supers.super2.right", 1, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
-        builder.comment("");
-        builder.comment("  ~~~ [ Super Level 3 ] ~~~");
-        builder.comment("");
-
+        // Super level 3
         super3forward = builder.comment("How far forward the third level of the watering can's super will extend")
                 .defineInRange("supers.super3.forward", 4, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
@@ -77,9 +70,7 @@ public class Config
         super3right = builder.comment("How far right the third level of the watering can's super will extend")
                 .defineInRange("supers.super3.right", 1, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
-        builder.comment("");
-        builder.comment("  ~~~ [ Super Level 4 ] ~~~");
-        builder.comment("");
+        // Super level 4
 
         super4forward = builder.comment("How far forward the fourth level of the watering can's super will extend")
                 .defineInRange("supers.super4.forward", 4, MIN_SUPER_VAL, MAX_SUPER_VAL);
@@ -93,17 +84,13 @@ public class Config
         super4right = builder.comment("How far right the fourth level of the watering can's super will extend")
                 .defineInRange("supers.super4.right", 2, MIN_SUPER_VAL, MAX_SUPER_VAL);
 
-        builder.comment("");
-        builder.comment("  ~~~ [ Nether ] ~~~");
-        builder.comment("");
+        // Nether
 
         allowNether = builder.comment("Allow watering cans to work in the Nether.").define("nether.allow", false);
 
         allowNetheriteCanAnyways = builder.comment("Allows the Netherite Watering Can to be used in the nether, regardless of the previous option.").define("nether.allowNetheriteCanAnyways", true);
 
-        builder.comment("");
-        builder.comment("  ~~~ [ Interactions ] ~~~");
-        builder.comment("");
+        // Interactions
 
         extinguishFires = builder.comment("Whether watering cans extinguish fires & campfires.").define("interactions.extinguishFires", true);
 

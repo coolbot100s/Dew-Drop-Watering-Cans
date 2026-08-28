@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModItems {
 
-    private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(DewDropWateringCans.MODID)
+    private static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(DewDropWateringCans.MODID);
 
     public static final DeferredHolder<Item, Item> COPPER_WATERING_CAN = ITEMS.register("copper_watering_can",
             () -> new WateringCanItem(new Item.Properties().rarity(Rarity.COMMON).durability(12), 60, 18, 0));

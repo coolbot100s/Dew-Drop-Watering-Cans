@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bucket": {
+    "has_daimond_watering_can": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:water_bucket"
-            ]
+            "items": "dew_drop_watering_cans:diamond_watering_can"
           }
         ]
       },
@@ -15,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:diamond_watering_can"
+        "recipe": "dew_drop_watering_cans:netherite_watering_can"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_bucket",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_daimond_watering_can"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:diamond_watering_can"
+      "dew_drop_watering_cans:netherite_watering_can"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

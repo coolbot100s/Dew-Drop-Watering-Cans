@@ -24,9 +24,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.NeoForge;
 
-
+@EventBusSubscriber(modid = DewDropWateringCans.MODID)
 public class WateringCanEventsHandler {
 
     @SubscribeEvent
@@ -47,8 +48,7 @@ public class WateringCanEventsHandler {
         // When pouring as a part of a super, these should be handled by the super event
         if  (!isSuper) {
             // Damage the item by 1
-            stack.hurt(1, RandomSource.create(), null);
-
+            stack.setDamageValue(stack.getDamageValue() + 1);
             // Reset cooldown
             resetCooldown(player, stack);
         }
@@ -177,7 +177,7 @@ public class WateringCanEventsHandler {
 
         // Damage the item by the areaSize
         if(!player.isCreative()) {
-            stack.hurt(areaSize, RandomSource.create(), null);
+            stack.setDamageValue(stack.getDamageValue() + areaSize);
         }
 
         // Reset cooldown
