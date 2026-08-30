@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "a": {
-      "tag": "forge:ingots/copper"
+      "tag": "c:gems/diamond"
     },
     "b": {
       "item": "minecraft:water_bucket"
@@ -15,7 +15,7 @@
     "aaa"
   ],
   "result": {
-    "item": "dew_drop_watering_cans:copper_watering_can"
-  },
-  "show_notification": true
+    "count": 1,
+    "id": "dew_drop_watering_cans:diamond_watering_can"
+  }
 }

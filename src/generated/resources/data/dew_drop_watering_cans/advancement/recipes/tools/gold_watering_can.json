@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:water_bucket"
-            ]
+            "items": "minecraft:water_bucket"
           }
         ]
       },
@@ -15,21 +13,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:copper_watering_can"
+        "recipe": "dew_drop_watering_cans:gold_watering_can"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_bucket",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bucket"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:copper_watering_can"
+      "dew_drop_watering_cans:gold_watering_can"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

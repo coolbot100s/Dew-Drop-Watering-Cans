@@ -7,7 +7,8 @@
     "item": "dew_drop_watering_cans:diamond_watering_can"
   },
   "result": {
-    "item": "dew_drop_watering_cans:netherite_watering_can"
+    "count": 1,
+    "id": "dew_drop_watering_cans:netherite_watering_can"
   },
   "template": {
     "item": "minecraft:netherite_upgrade_smithing_template"

@@ -1,5 +1,6 @@
 package cool.bot.dewdropwateringcans.item.wateringCan;
 
+import cool.bot.dewdropwateringcans.DewDropWateringCans;
 import cool.bot.dewdropwateringcans.event.*;
 import cool.bot.botslib.tag.DewDropBlockTags;
 import cool.bot.botslib.util.Util;
@@ -22,10 +23,11 @@ import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.NeoForge;
 
-
+@EventBusSubscriber(modid = DewDropWateringCans.MODID)
 public class WateringCanEventsHandler {
 
     @SubscribeEvent
@@ -46,14 +48,13 @@ public class WateringCanEventsHandler {
         // When pouring as a part of a super, these should be handled by the super event
         if  (!isSuper) {
             // Damage the item by 1
-            stack.hurt(1, RandomSource.create(), null);
-
+            stack.setDamageValue(stack.getDamageValue() + 1);
             // Reset cooldown
             resetCooldown(player, stack);
         }
 
         // Special nether interaction
-        if (level.dimension().equals(ServerLevel.NETHER) && !Config.allowNether && !(Config.allowNetheriteCanAnyways && stack.is(ModItems.NETHERITE_WATERING_CAN.get()))) {
+        if (level.dimension().equals(ServerLevel.NETHER) && !DewDropWateringCans.CONFIG.allowNether.get() && !(DewDropWateringCans.CONFIG.allowNetheriteCanAnyways.get() && stack.is(ModItems.NETHERITE_WATERING_CAN.get()))) {
             for (int i = 0; i < 8; i++) {
                 double offsetX = 0.5;
                 double offsetY = state.getShape(level,pos).max(Direction.Axis.Y);
@@ -79,11 +80,11 @@ public class WateringCanEventsHandler {
             state = level.getBlockState(pos);
             Util.setMoist(level, pos);
         // dirt to mud conversion
-        } else if (Config.mudOdds > 0 && (state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) && RNG.ihundo(Config.mudOdds)) {
+        } else if (DewDropWateringCans.CONFIG.mudOdds.get() > 0 && (state.is(Blocks.DIRT) || state.is(Blocks.COARSE_DIRT) || state.is(Blocks.ROOTED_DIRT)) && RNG.ihundo(DewDropWateringCans.CONFIG.mudOdds.get())) {
             level.setBlock(pos, Blocks.MUD.defaultBlockState(),3);
             level.playSound(null,pos, SoundEvents.MUD_PLACE, SoundSource.BLOCKS, 1, 1);
         // fire extinguishing mechanics (last)
-        } else if (Config.extinguishFires) {
+        } else if (DewDropWateringCans.CONFIG.extinguishFires.get()) {
         // Campfires
             if (state.is(BlockTags.CAMPFIRES) && state.getValue(BlockStateProperties.LIT)) {
                 level.setBlock(pos, state.setValue(BlockStateProperties.LIT, false), 3);
@@ -108,7 +109,7 @@ public class WateringCanEventsHandler {
         }
 
         // Bonemeal mechanic
-        if (Config.bonemealOdds > 0 && RNG.ihundo(Config.bonemealOdds)) {
+        if (DewDropWateringCans.CONFIG.bonemealOdds.get() > 0 && RNG.ihundo(DewDropWateringCans.CONFIG.bonemealOdds.get())) {
             pos = pos.above();
             state = level.getBlockState(pos);
             Block block = state.getBlock();
@@ -164,19 +165,19 @@ public class WateringCanEventsHandler {
 
         // Check if we have enough water to use the super
         if (areaSize > stack.getMaxDamage() - stack.getDamageValue() && !player.isCreative()) {
-            MinecraftForge.EVENT_BUS.post(new WateringCanFailEvent(level, player, stack));
+            NeoForge.EVENT_BUS.post(new WateringCanFailEvent(level, player, stack));
             return;
         }
 
         // Now you can iterate over the blocks within the area
         BlockPos.betweenClosedStream(area).forEach(blockPos -> {
                     BlockState state = level.getBlockState(blockPos);
-                    MinecraftForge.EVENT_BUS.post(new WateringCanPourEvent(level, player, stack, blockPos, state, true));
+                    NeoForge.EVENT_BUS.post(new WateringCanPourEvent(level, player, stack, blockPos, state, true));
                     }) ;
 
         // Damage the item by the areaSize
         if(!player.isCreative()) {
-            stack.hurt(areaSize, RandomSource.create(), null);
+            stack.setDamageValue(stack.getDamageValue() + areaSize);
         }
 
         // Reset cooldown
